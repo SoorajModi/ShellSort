@@ -5,7 +5,8 @@
 
 //void generateRandomArray(int** numArr);
 void readArrayFromFile(int** numArr, int* arrLen, FILE* fp);
-void shellSort(int** numArr, int arrLen, int num);
+void shellSort(int** numArr, int* arrLen);
+void outputResults(int** numArr, int* arrLen, char* fileName);
 
 int main(void){
   printf("Beginning the Shell Sort Algorithm in C\n");
@@ -20,21 +21,25 @@ int main(void){
   int* arrLen = NULL;
   arrLen = malloc(sizeof(int));
   FILE* fp = NULL;
+  
   printf("Enter the name of the file of integers to be sorted: ");
   fgets(fileName, 50, stdin);
-
+  fileName[strlen(fileName) - 1] = '\0';
   fp = fopen(fileName, "r");
-
   if(!fp){
     printf("Unable to find file\nNow terminating program\n");
     return 0;
   }
+  
   readArrayFromFile(&numArr, arrLen, fp);
-  printf("arrLen: %d", *arrLen);
+  //printf("arrLen: %d", *arrLen);
 
   printf("Beginning shell sort\n");
-  //shellSort(&numArr, arrLen, fp);
+  shellSort(&numArr, arrLen);
   printf("Successfully sorted array\n");
+  
+  printf("Outputting results to sorted.txt\n");
+  outputResults(&numArr, arrLen, "sorted.txt");
 
   if(!numArr) free(numArr);
   if(!arrLen) free(arrLen);
@@ -44,9 +49,9 @@ int main(void){
   return 0;
 }
 
-void shellSort(int** numArr, int arrLen, int num){
-  for(int gap = arrLen/2; gap > 0; gap /= 2){
-    for(int i = gap; i < arrLen; i++){
+void shellSort(int** numArr, int* arrLen){
+  for(int gap = *arrLen/2; gap > 0; gap /= 2){
+    for(int i = gap; i < *arrLen; i++){
       int temp = (*numArr)[i];
       int j = 0;
 
@@ -60,18 +65,40 @@ void shellSort(int** numArr, int arrLen, int num){
 }
 
 void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
+  if(!fp)  return;
+  
+  fseek(fp, 0, SEEK_END);
+  long int eof = ftell(fp);
+  fseek(fp, 0, SEEK_SET); 
+	
   *numArr = malloc(sizeof(int)*10000);
 
   char input[30];
   int index = 0;
-
-  while(ftell(fp) != EOF){
-    fgets(input, 30, stdin);
+  
+  while(ftell(fp) != eof){
+    fgets(input, 30, fp);
     (*numArr)[index] = atoi(input);
     index++;
   }
 
   *arrLen = index;
+}
+
+void outputResults(int** numArr, int* arrLen, char* fileName){
+	FILE* fp = NULL;
+	fp = fopen(fileName, "w");
+	if(!fp){
+		printf("Unable to create a new file for writing\nWriting to file failed\n");
+		return;
+	}
+	
+	int i;
+	for(i = 0; i < *arrLen; i++){
+		fprintf(fp, "%d\n", (*numArr)[i]);
+	}
+	
+	fclose(fp);
 }
 
 /*void generateRandomArray(int** numArr){
