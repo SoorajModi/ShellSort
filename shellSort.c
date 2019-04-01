@@ -21,7 +21,7 @@ int main(void){
   int* arrLen = NULL;
   arrLen = malloc(sizeof(int));
   FILE* fp = NULL;
-  
+
   printf("Enter the name of the file of integers to be sorted: ");
   fgets(fileName, 50, stdin);
   fileName[strlen(fileName) - 1] = '\0';
@@ -30,14 +30,18 @@ int main(void){
     printf("Unable to find file\nNow terminating program\n");
     return 0;
   }
-  
+
   readArrayFromFile(&numArr, arrLen, fp);
   //printf("arrLen: %d", *arrLen);
 
-  printf("Beginning shell sort\n");
+  time_t start, stop;
+  start=clock();
+  printf("Starting Timer\nBeginning shell sort\n");
   shellSort(&numArr, arrLen);
-  printf("Successfully sorted array\n");
-  
+  printf("Successfully sorted array\nStopping Timer\n");
+  stop=clock();
+  printf("Total Time for ShellSort subroutine is: %ld seconds\n", (long int)(stop - start));
+
   printf("Outputting results to sorted.txt\n");
   outputResults(&numArr, arrLen, "sorted.txt");
 
@@ -66,16 +70,16 @@ void shellSort(int** numArr, int* arrLen){
 
 void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
   if(!fp)  return;
-  
+
   fseek(fp, 0, SEEK_END);
   long int eof = ftell(fp);
-  fseek(fp, 0, SEEK_SET); 
-	
+  fseek(fp, 0, SEEK_SET);
+
   *numArr = malloc(sizeof(int)*10000);
 
   char input[30];
   int index = 0;
-  
+
   while(ftell(fp) != eof){
     fgets(input, 30, fp);
     (*numArr)[index] = atoi(input);
@@ -92,12 +96,9 @@ void outputResults(int** numArr, int* arrLen, char* fileName){
 		printf("Unable to create a new file for writing\nWriting to file failed\n");
 		return;
 	}
-	
-	int i;
-	for(i = 0; i < *arrLen; i++){
-		fprintf(fp, "%d\n", (*numArr)[i]);
-	}
-	
+
+	for(int i = 0; i < *arrLen; i++)  fprintf(fp, "%d\n", (*numArr)[i]);
+
 	fclose(fp);
 }
 
