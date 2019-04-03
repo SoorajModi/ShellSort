@@ -6,13 +6,32 @@
 program main
     implicit none
     integer :: arrLen = 0
-    integer :: ios
-    integer :: temp
-    character (len = 30) :: fileName
     integer, dimension(100000) :: numArr
-    logical :: fileExist
     
     write(*,*)'Beginning the Shell Sort Algorithm in Fortran'
+    call readArrayFromFile(numArr,arrLen)
+    
+    write(*,*)'Beginning shell sort algorithm'    
+    write(*,*)'Successfully sorted array'
+    
+    write(*,*)'Outputting results to sorted.txt'
+    call outputArrayToFile(numArr, arrLen)
+    
+    write(*,*)'Successfully exiting program'
+end program
+
+!subroutine shellSort(numArr,arrLen)
+    !integer, dimension(100000), intent (in out) :: numArr
+    !integer, intent (in) :: arrLen   
+    !integer :: gap, i, temp, j    
+!end subroutine 
+
+subroutine readArrayFromFile(numArr,arrLen)
+    integer, dimension(100000), intent (in out) :: numArr
+    integer, intent (in out) :: arrLen
+    character (len = 30) :: fileName
+    logical :: fileExist
+    integer :: ios, temp  
     
     write(*,*)'Enter the name of the file of integers to be sorted:'
     read(*,*)fileName
@@ -31,7 +50,19 @@ program main
     
     arrLen = arrLen - 1
     
-    write(*,*)numArr(arrLen)
-    
     close (9)
-end program
+end subroutine 
+
+subroutine outputArrayToFile(numArr,arrLen)
+    integer, dimension(100000), intent (in out) :: numArr
+    integer, intent (in) :: arrLen  
+    integer :: i
+    
+    open(unit=15,file="sorted.txt")
+    
+    do i = 0, arrLen
+        write(15,*)numArr(i)
+    end do     
+    
+    close(15)
+end subroutine
