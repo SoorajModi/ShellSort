@@ -5,17 +5,17 @@
 
 program main
     implicit none
-    real :: arrLen = 0
+    integer :: arrLen = 0
     integer :: ios
-    integer, allocatable :: numArr(:)
+    integer :: temp
     character (len = 30) :: fileName
-    character (len = 30) :: tempStr
+    integer, dimension(100000) :: numArr
     logical :: fileExist
     
     write(*,*)'Beginning the Shell Sort Algorithm in Fortran'
     
     write(*,*)'Enter the name of the file of integers to be sorted:'
-    read(*,'(A)')fileName
+    read(*,*)fileName
     
     inquire(file=fileName, exist=fileExist)
     if(.NOT. fileExist) stop 'File does not exist, aborting'
@@ -23,14 +23,15 @@ program main
     open(unit=9,file=fileName) 
     
     do 
-	    read(9, '(A)', iostat=ios)tempStr
+        read(9, *, iostat=ios)temp
         if (ios /= 0) exit
+        numArr(arrLen) = temp
         arrLen = arrLen + 1
     end do
     
-    allocate(numArr(arrLen))
+    arrLen = arrLen - 1
     
-    rewind(9)
-    !write (9,*) 'This is an example output to file'
+    write(*,*)numArr(arrLen)
+    
     close (9)
 end program
