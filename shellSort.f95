@@ -11,7 +11,8 @@ program main
     write(*,*)'Beginning the Shell Sort Algorithm in Fortran'
     call readArrayFromFile(numArr,arrLen)
     
-    write(*,*)'Beginning shell sort algorithm'    
+    write(*,*)'Beginning shell sort algorithm'
+    call shellSort(numArr, arrLen)    
     write(*,*)'Successfully sorted array'
     
     write(*,*)'Outputting results to sorted.txt'
@@ -20,11 +21,27 @@ program main
     write(*,*)'Successfully exiting program'
 end program
 
-!subroutine shellSort(numArr,arrLen)
-    !integer, dimension(100000), intent (in out) :: numArr
-    !integer, intent (in) :: arrLen   
-    !integer :: gap, i, temp, j    
-!end subroutine 
+subroutine shellSort(numArr,arrLen)
+    integer, dimension(100000), intent (in out) :: numArr
+    integer, intent (in) :: arrLen   
+    integer :: gap, i, temp, j
+    
+    gap = 0
+    do gap = arrLen/2, 0, gap/2
+        do i = gap, arrLen
+            temp = numArr(i)
+            j = 0
+            
+            do j = i, gap, -1
+                if(numArr(j-gap) < temp) then
+                    numArr(j) = numArr(j-gap)
+                end if
+            end do
+                        
+            numArr(j) = temp
+        end do
+    end do    
+end subroutine 
 
 subroutine readArrayFromFile(numArr,arrLen)
     integer, dimension(100000), intent (in out) :: numArr
