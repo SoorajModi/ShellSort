@@ -24,7 +24,14 @@ end program
 subroutine shellSort(numArr,arrLen)
     integer, dimension(100000), intent (in out) :: numArr
     integer, intent (in) :: arrLen   
-    integer :: gap, i, temp, j
+    integer :: gap, i, temp, j, c1, c2, cr, cm
+    
+    call system_clock(count_rate=cr)
+    call system_clock(count_max=cm)
+    rate = real(cr)
+    
+    write(*,*)'Beginning timer'
+    call system_clock(c1)
     
     gap = 0
     do gap = arrLen/2, 0, gap/2
@@ -40,7 +47,11 @@ subroutine shellSort(numArr,arrLen)
                         
             numArr(j) = temp
         end do
-    end do    
+    end do
+    
+    write(*,*)'Stopping timer'
+    call system_clock(c2)
+    write(*,*)'Total algorithm time: ', (c2-c1)/rate    
 end subroutine 
 
 subroutine readArrayFromFile(numArr,arrLen)
