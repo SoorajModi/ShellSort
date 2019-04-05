@@ -33,8 +33,8 @@ subroutine shellSort(numArr,arrLen)
     write(*,*)'Beginning timer'
     call system_clock(c1)
     
-    gap = 0
-    do gap = arrLen/2, 0, gap/2
+    gap = arrLen/2
+    do while (gap > 0) 
         do i = gap, arrLen
             temp = numArr(i)
             j = 0
@@ -47,6 +47,7 @@ subroutine shellSort(numArr,arrLen)
                         
             numArr(j) = temp
         end do
+        gap = gap / 2
     end do
     
     write(*,*)'Stopping timer'
