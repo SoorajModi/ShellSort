@@ -11,7 +11,7 @@ def readListFromFile(numList):
 	fileName = raw_input("Enter the name of the file to be read: ");
 	fp = open(fileName, "r");
 	for line in fp:
-		line.replace('\n','')
+		line = line.replace('\n','')
 		numList.append(line);	
 	fp.close()
 	print("File successfully read!");
@@ -20,23 +20,25 @@ def writeArrayToFile(numArr):
     print("Outputting sorted array to sortedPy.txt");
     with open("sortedPy.txt", "w") as fp:
 		for item in numArr:
-			fp.write("%s" % item)
+			fp.write("%s\n" % item)
     fp.close()
     print("Successfully printed array to file");
     
-def shellSort(numList, numArr):
-    print("Beginning shell sort algorithm")
-	
+def convertListToArray(numList, numArray):
     dataset_list = ';'.join(numList)
     for item in dataset_list.split(';'): # comma, or other
 	    numArr.append(item)
     
+def shellSort(numArr):
+    print("Beginning shell sort algorithm")
     print("Beginning timer")
     begin = time.time()
     
-    gap = len(numArr) / 2
+    arrLen = len(numArr)
+    print("arrLen: ", arrLen)
+    gap = arrLen / 2
     while gap > 0:
-        for i in range(gap, len(numArr)):
+        for i in range(gap, arrLen):
             temp = numArr[i]
             j = i
 			
@@ -57,8 +59,10 @@ print("Beginning shell sort algorithm in python")
 numList = list();
 readListFromFile(numList)
 
-numArr = [len(numList)]
-shellSort(numList, numArr)
+numArr = []    # create an int array of the list length
+convertListToArray(numList, numArr)
+
+shellSort(numArr)
 
 writeArrayToFile(numArr)
 

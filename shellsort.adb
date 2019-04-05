@@ -7,7 +7,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
 procedure shellSort is
-    type arr is array(1..100500) of integer;
+    type arr is array(1..100001) of integer;
     type arr_stack is
         record
             arrList : arr;
@@ -49,16 +49,16 @@ procedure shellSort is
     
     function writeSorted(arrSorted : arr; arrLen: integer) return integer is
         fp : file_type;
-        index : integer := 1;
+        index : integer := arrLen;
     begin
         -- Open file
         create(fp,out_file,"sortedAda.txt");
         
         -- Write to file
         loop
-            exit when index >= arrLen;
+            exit when index = 1;
             put_line(fp, integer'image(arrSorted(index)));
-            index := index + 1;
+            index := index - 1;
         end loop;
         
         -- Close file
@@ -83,14 +83,15 @@ procedure shellSort is
            i := gap;
            loop 
                exit when i = arrLen;
-               temp := arr1(i);
+               temp := arr2(i);
                j := i;
                
-               loop
-                   exit when ((j >= gap) and (arr2(j - gap) > temp));
-                   arr2(j) := arr2(j-gap);
+               while (j > gap) and then (j > 1) loop
+                   exit when (arr2(j - gap) > temp);
+                   arr2(j) := arr2(j-gap);                   
                    j := j - 1;
                end loop;
+               
                arr2(j) := temp;
                
                i := i + 1;
