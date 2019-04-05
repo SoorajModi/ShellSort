@@ -37,12 +37,11 @@ subroutine shellSort(numArr,arrLen)
     do while (gap > 0) 
         do i = gap, arrLen
             temp = numArr(i)
-            j = 0
+            j = i
             
-            do j = i, gap, -1
-                if(numArr(j-gap) < temp) then
-                    numArr(j) = numArr(j-gap)
-                end if
+            do while ((j >= gap) .AND. (numArr(j-gap) > temp))
+                numArr(j) = numArr(j-gap)
+                j = j - 1
             end do
                         
             numArr(j) = temp

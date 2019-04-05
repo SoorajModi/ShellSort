@@ -56,7 +56,7 @@ void shellSort(int** numArr, int* arrLen){
   for(int gap = *arrLen/2; gap > 0; gap /= 2){
     for(int i = gap; i < *arrLen; i++){
       int temp = (*numArr)[i];
-      int j = 0;
+      int j = i;
 
       for(j = i; j >= gap && (*numArr)[j - gap] > temp; j--){
         (*numArr)[j] = (*numArr)[j-gap];
