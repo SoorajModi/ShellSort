@@ -13,15 +13,12 @@ int main(void){
 
   int* numArr = NULL;
 
-  /*printf("Generating an array of random numbers\n");
-  generateRandomArray(&numArr);
-  printf("Successfully generated an array of random numbers\n");*/
-
   char fileName[50];
   int* arrLen = NULL;
   arrLen = malloc(sizeof(int));
   FILE* fp = NULL;
 
+  // Open file to be read
   printf("Enter the name of the file of integers to be sorted: ");
   fgets(fileName, 50, stdin);
   fileName[strlen(fileName) - 1] = '\0';
@@ -32,8 +29,8 @@ int main(void){
   }
 
   readArrayFromFile(&numArr, arrLen, fp);
-  //printf("arrLen: %d", *arrLen);
 
+  //Commence algorithm and timer
   time_t start, stop;
   start=clock();
   printf("Starting Timer\nBeginning shell sort\n");
@@ -42,9 +39,11 @@ int main(void){
   stop=clock();
   printf("Total Time for ShellSort subroutine is: %ld seconds\n", (long int)(stop - start));
 
+  //Output results
   printf("Outputting results to sorted.txt\n");
-  outputResults(&numArr, arrLen, "sorted.txt");
+  outputResults(&numArr, arrLen, "sortedC.txt");
 
+  //Free allocated memory
   if(!numArr) free(numArr);
   if(!arrLen) free(arrLen);
   fclose(fp);
@@ -101,12 +100,3 @@ void outputResults(int** numArr, int* arrLen, char* fileName){
 
 	fclose(fp);
 }
-
-/*void generateRandomArray(int** numArr){
-  *numArr = malloc(sizeof(int)*1000);
-  srand(time(NULL));
-
-  for(int i = 0; i < 1000; i++){
-    (*numArr)[i] = rand() % (1000 + 1);
-  }
-}*/

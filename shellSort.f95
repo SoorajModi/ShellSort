@@ -86,7 +86,7 @@ subroutine outputArrayToFile(numArr,arrLen)
     integer, intent (in) :: arrLen  
     integer :: i
     
-    open(unit=15,file="sorted.txt")
+    open(unit=15,file="sortedFortran.txt")
     
     do i = 0, arrLen
         write(15,*)numArr(i)
