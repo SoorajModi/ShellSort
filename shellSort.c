@@ -9,7 +9,7 @@ void shellSort(int** numArr, int* arrLen);
 void outputResults(int** numArr, int* arrLen, char* fileName);
 
 int main(void){
-  printf("Beginning the Shell Sort Algorithm in C\n");
+  printf("Beginning the Shell Sort Program in C\n");
 
   int* numArr = NULL;
 

@@ -5,6 +5,8 @@
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+--with Ada.Real_Time;
+with Ada.Calendar; use Ada.Calendar;
 
 procedure shellSort is
     type arr is array(1..100001) of integer;
@@ -76,8 +78,14 @@ procedure shellSort is
         temp : integer;
         i : integer;
         j : integer := 0;
-        arr2 : arr := arr1;  
+        arr2 : arr := arr1;
+        start : time;
+        stop : time;
     begin
+       put_line("Beginning shell sort algorithm");
+       put_line("Beginning timer");      
+       start := Clock;
+       
        loop
            exit when gap = 0;
            i := gap;
@@ -100,11 +108,16 @@ procedure shellSort is
            gap := gap / 2;
        end loop;
        
+       put_line("Stopping timer"); 
+       stop := Clock;
+       
+       put_line("Shell Sort algorithm run time: ");
+              
        return arr2;
     end shellSortArray;
     
 begin
-    put_line("Beginning shell sort algorithm in ada");
+    put_line("Beginning shell sort program in ada");
     
     -- Read in array from file
     arrMain := readUnsorted;

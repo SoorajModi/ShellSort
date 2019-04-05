@@ -35,7 +35,6 @@ def shellSort(numArr):
     begin = time.time()
     
     arrLen = len(numArr)
-    print("arrLen: ", arrLen)
     gap = arrLen / 2
     while gap > 0:
         for i in range(gap, arrLen):
@@ -54,12 +53,12 @@ def shellSort(numArr):
     print("Total algorithm run time: ", end-begin, "seconds")    
 
 
-print("Beginning shell sort algorithm in python")
+print("Beginning shell sort program in python")
 
 numList = list();
 readListFromFile(numList)
 
-numArr = []    # create an int array of the list length
+numArr = []
 convertListToArray(numList, numArr)
 
 shellSort(numArr)

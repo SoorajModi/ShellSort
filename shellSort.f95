@@ -8,7 +8,7 @@ program main
     integer :: arrLen = 0
     integer, dimension(100000) :: numArr
     
-    write(*,*)'Beginning the Shell Sort Algorithm in Fortran'
+    write(*,*)'Beginning the Shell Sort Program in Fortran'
     call readArrayFromFile(numArr,arrLen)
     
     write(*,*)'Beginning shell sort algorithm'
