@@ -2,6 +2,7 @@
 # 0965941
 # modis@uoguelph.ca
 # CIS 3190 - Assignment 4
+# To compile: python shellSort.py
 
 import time
 import random

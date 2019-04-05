@@ -1,3 +1,10 @@
+/* Sooraj Modi
+ * CIS 3190 - Assignment 4
+ * modis@uoguelph.ca
+ * 0965941
+ * To compile: "gcc --Wall -std=c99 shellSort.c -o output"
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,7 +44,7 @@ int main(void){
   shellSort(&numArr, arrLen);
   printf("Successfully sorted array\nStopping Timer\n");
   stop=clock();
-  printf("Total Time for ShellSort subroutine is: %ld milli seconds\n", (long int)(stop - start));
+  printf("Total Time for ShellSort subroutine is: %ld micro seconds\n", (long int)(stop - start));
 
   //Output results
   printf("Outputting results to sorted.txt\n");

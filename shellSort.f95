@@ -2,6 +2,7 @@
 ! CIS 3190 - Assignment 4
 ! modis@uoguelph.ca
 ! 0965941
+! To compile: "gfortran -Wall shellSort.f95 -o fortran"
 
 program main
     implicit none

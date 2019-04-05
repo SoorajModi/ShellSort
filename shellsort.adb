@@ -2,10 +2,10 @@
 -- 0965941
 -- modis@uoguelph.ca
 -- CIS 3190 Assignment 4
+-- To compile: "gnatmake -Wall shellsort.adb -o ada"
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
---with Ada.Real_Time;
 with Ada.Calendar; use Ada.Calendar;
 
 procedure shellSort is
@@ -79,12 +79,11 @@ procedure shellSort is
         i : integer;
         j : integer := 0;
         arr2 : arr := arr1;
-        start : time;
-        stop : time;
+        startTime : Ada.Calendar.Time;
     begin
        put_line("Beginning shell sort algorithm");
        put_line("Beginning timer");      
-       start := Clock;
+       startTime := Ada.Calendar.Clock;
        
        loop
            exit when gap = 0;
@@ -108,10 +107,9 @@ procedure shellSort is
            gap := gap / 2;
        end loop;
        
-       put_line("Stopping timer"); 
-       stop := Clock;
-       
+       put_line("Stopping timer");            
        put_line("Shell Sort algorithm run time: ");
+       Ada.Text_IO.Put_Line(Duration'Image(Ada.Calendar.Clock - startTime));
               
        return arr2;
     end shellSortArray;
