@@ -11,7 +11,7 @@ def readListFromFile(numList):
 	fileName = raw_input("Enter the name of the file to be read: ");
 	fp = open(fileName, "r");
 	for line in fp:
-		line.rstrip()
+		line.replace('\n','')
 		numList.append(line);	
 	fp.close()
 	print("File successfully read!");

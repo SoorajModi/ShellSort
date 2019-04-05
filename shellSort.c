@@ -37,7 +37,7 @@ int main(void){
   shellSort(&numArr, arrLen);
   printf("Successfully sorted array\nStopping Timer\n");
   stop=clock();
-  printf("Total Time for ShellSort subroutine is: %ld seconds\n", (long int)(stop - start));
+  printf("Total Time for ShellSort subroutine is: %ld milli seconds\n", (long int)(stop - start));
 
   //Output results
   printf("Outputting results to sorted.txt\n");
@@ -74,7 +74,7 @@ void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
   long int eof = ftell(fp);
   fseek(fp, 0, SEEK_SET);
 
-  *numArr = malloc(sizeof(int)*10000);
+  *numArr = malloc(sizeof(int)*100500);
 
   char input[30];
   int index = 0;
