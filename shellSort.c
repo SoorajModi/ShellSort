@@ -60,6 +60,7 @@ int main(void){
 }
 
 void shellSort(int** numArr, int* arrLen){
+  // Beginning shell sort algorithm
   for(int gap = *arrLen/2; gap > 0; gap /= 2){
     for(int i = gap; i < *arrLen; i++){
       int temp = (*numArr)[i];
@@ -76,7 +77,7 @@ void shellSort(int** numArr, int* arrLen){
 
 void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
   if(!fp)  return;
-
+  
   fseek(fp, 0, SEEK_END);
   long int eof = ftell(fp);
   fseek(fp, 0, SEEK_SET);
@@ -86,6 +87,7 @@ void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
   char input[30];
   int index = 0;
 
+  // Read every element in file and place into array
   while(ftell(fp) != eof){
     fgets(input, 30, fp);
     (*numArr)[index] = atoi(input);
@@ -98,11 +100,13 @@ void readArrayFromFile(int** numArr, int* arrLen, FILE* fp){
 void outputResults(int** numArr, int* arrLen, char* fileName){
 	FILE* fp = NULL;
 	fp = fopen(fileName, "w");
+	//Check to make sure file was made (error proofing)
 	if(!fp){
 		printf("Unable to create a new file for writing\nWriting to file failed\n");
 		return;
 	}
 
+    // Output every element of the array into a file
 	for(int i = 0; i < *arrLen; i++)  fprintf(fp, "%d\n", (*numArr)[i]);
 
 	fclose(fp);

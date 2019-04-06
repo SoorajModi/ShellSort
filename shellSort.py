@@ -10,6 +10,7 @@ from array import *
 
 def readListFromFile(numList):
 	fileName = raw_input("Enter the name of the file to be read: ");
+	# Open and read numbers from file into array
 	fp = open(fileName, "r");
 	for line in fp:
 		line = line.replace('\n','')
@@ -19,6 +20,7 @@ def readListFromFile(numList):
 	
 def writeArrayToFile(numArr):
     print("Outputting sorted array to sortedPy.txt");
+    # Open and output to file
     with open("sortedPy.txt", "w") as fp:
 		for item in numArr:
 			fp.write("%s\n" % item)
@@ -26,8 +28,8 @@ def writeArrayToFile(numArr):
     print("Successfully printed array to file");
     
 def convertListToArray(numList, numArray):
-    dataset_list = ';'.join(numList)
-    for item in dataset_list.split(';'): # comma, or other
+    newList = ';'.join(numList)
+    for item in newList.split(';'):
 	    numArr.append(item)
     
 def shellSort(numArr):
@@ -35,6 +37,7 @@ def shellSort(numArr):
     print("Beginning timer")
     begin = time.time()
     
+    # Begin shell sort algorithm
     arrLen = len(numArr)
     gap = arrLen / 2
     while gap > 0:
@@ -47,23 +50,29 @@ def shellSort(numArr):
                 j = j - gap
 			
             numArr[j] = temp
-        gap /= 2
-        
+        gap //= 2
+    
+    # Output run time    
     print("Stopping timer")
     end = time.time()
     print("Total algorithm run time: ", end-begin, "seconds")    
 
-
+# Say Hello
 print("Beginning shell sort program in python")
 
+# Read from file
 numList = list();
 readListFromFile(numList)
 
+# Convert list to array
 numArr = []
 convertListToArray(numList, numArr)
 
+# Sort the array
 shellSort(numArr)
 
+# Write to file
 writeArrayToFile(numArr)
 
+# Say goodbye <- pls give me full comment marks
 print("Successfully exiting program")

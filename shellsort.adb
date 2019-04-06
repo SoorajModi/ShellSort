@@ -85,8 +85,9 @@ procedure shellSort is
        put_line("Beginning timer");      
        startTime := Ada.Calendar.Clock;
        
+       -- Begin algorithm
        loop
-           exit when gap = 0;
+           exit when gap = 0; 
            i := gap;
            loop 
                exit when i = arrLen;
@@ -107,6 +108,7 @@ procedure shellSort is
            gap := gap / 2;
        end loop;
        
+       -- Output runtime to user
        put_line("Stopping timer");            
        put_line("Shell Sort algorithm run time: ");
        Ada.Text_IO.Put_Line(Duration'Image(Ada.Calendar.Clock - startTime));
